@@ -7,7 +7,9 @@ import {
   useLocation,
   useNavigate,
 } from 'react-router-dom';
+import { FAILED_ATTEMPT_LIMIT } from '../constants/demoConfig';
 import { ROUTES } from '../constants/routes';
+import { STORAGE_LOGICAL_KEYS } from '../constants/storageKeys';
 import { useAuth } from '../context/AuthContext';
 import { useLocale } from '../context/LocaleContext';
 import {
@@ -16,6 +18,9 @@ import {
 import {
   facilitatorService as defaultFacilitatorService,
 } from '../services/facilitatorService';
+import {
+  storageService as defaultStorageService,
+} from '../services/storageService';
 import { LanguageToggle } from '../components/layout/LanguageToggle';
 import { SabLogo } from '../components/layout/SabLogo';
 import { Button } from '../components/ui/Button';
@@ -167,7 +172,7 @@ function getLoginDestination(state) {
  * @param {(key: string, values?: Record<string, unknown>) => string} t
  * @returns {string}
  */
-function getAuthenticationError(response, t) {
+function getAuthenticationError(response, t, username) {
   const errorCode =
     response !== null && typeof response === 'object'
       ? response.errorCode
@@ -184,7 +189,22 @@ function getAuthenticationError(response, t) {
     errorCode === 'AUTH_INVALID_CREDENTIALS' ||
     errorCode === 'INVALID_CREDENTIALS'
   ) {
-    const attemptsRemaining = response?.data?.attemptsRemaining;
+    let attemptsRemaining = response?.data?.attemptsRemaining;
+
+    if (!Number.isSafeInteger(attemptsRemaining) && typeof username === 'string') {
+      try {
+        const users = defaultStorageService.read(STORAGE_LOGICAL_KEYS.USERS);
+        const personaKey = getPersonaKey(username);
+        if (personaKey && users?.[personaKey]) {
+          attemptsRemaining = Math.max(
+            0,
+            FAILED_ATTEMPT_LIMIT - (users[personaKey].failedAttempts ?? 0),
+          );
+        }
+      } catch {
+        // fallback
+      }
+    }
 
     if (
       Number.isSafeInteger(attemptsRemaining) &&
@@ -354,7 +374,7 @@ export function LoginPage({
     useState(false);
 
   const locked =
-    loginError === t('authentication.accountLocked');
+    loginError === t('authentication.accountLocked') || resettingLockout;
   const busy = submitting || resettingLockout;
   const destination = getLoginDestination(location.state);
 
@@ -403,7 +423,8 @@ export function LoginPage({
   useEffect(() => {
     if (
       isAuthenticated &&
-      status !== 'loading'
+      status !== 'loading' &&
+      location.state?.from
     ) {
       navigate(destination, {
         replace: true,
@@ -412,6 +433,7 @@ export function LoginPage({
   }, [
     destination,
     isAuthenticated,
+    location.state,
     navigate,
     status,
   ]);
@@ -482,7 +504,7 @@ export function LoginPage({
 
       if (response?.status !== 'success') {
         setLoginError(
-          getAuthenticationError(response, t),
+          getAuthenticationError(response, t, username.trim()),
         );
         return;
       }
@@ -503,7 +525,6 @@ export function LoginPage({
     }
 
     setResettingLockout(true);
-    setLoginError('');
     setResetMessage('');
 
     try {
@@ -520,6 +541,7 @@ export function LoginPage({
         return;
       }
 
+      setLoginError('');
       setResetMessage(content.resetSuccess);
     } catch {
       setLoginError(t('facilitator.resetError'));

@@ -580,10 +580,10 @@ export function FacilitatorToolbar({
               </p>
             </div>
 
-            <label className="relative inline-flex min-h-touch shrink-0 cursor-pointer items-center">
+            <label className="relative inline-flex min-h-touch shrink-0 cursor-pointer items-center scroll-mt-24">
               <input
                 type="checkbox"
-                className="peer sr-only"
+                className="peer absolute inset-0 z-10 h-full w-full cursor-pointer opacity-0"
                 checked={errorModeEnabled}
                 disabled={busy}
                 aria-label={
@@ -593,7 +593,7 @@ export function FacilitatorToolbar({
                 }
                 onChange={handleErrorModeChange}
               />
-              <span className="h-7 w-12 rounded-full bg-surface-muted transition-colors peer-checked:bg-sab-600 peer-focus-visible:ring-2 peer-focus-visible:ring-sab-600 peer-focus-visible:ring-offset-2 peer-disabled:cursor-not-allowed peer-disabled:opacity-60 after:absolute after:start-1 after:top-2 after:h-5 after:w-5 after:rounded-full after:bg-white after:shadow after:transition-transform peer-checked:after:translate-x-5 rtl:peer-checked:after:-translate-x-5" />
+              <span className="pointer-events-none h-7 w-12 rounded-full bg-surface-muted transition-colors peer-checked:bg-sab-600 peer-focus-visible:ring-2 peer-focus-visible:ring-sab-600 peer-focus-visible:ring-offset-2 peer-disabled:cursor-not-allowed peer-disabled:opacity-60 after:absolute after:start-1 after:top-2 after:h-5 after:w-5 after:rounded-full after:bg-white after:shadow after:transition-transform peer-checked:after:translate-x-5 rtl:peer-checked:after:-translate-x-5" />
             </label>
           </div>
 

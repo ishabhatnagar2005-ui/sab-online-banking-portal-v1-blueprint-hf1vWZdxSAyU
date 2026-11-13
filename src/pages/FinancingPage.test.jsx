@@ -192,10 +192,10 @@ describe('FinancingPage', () => {
         ).length,
       ).toBeGreaterThan(0);
       expect(
-        screen.getByText(
+        screen.getAllByText(
           formatDate(facility.nextDueDate, 'en'),
-        ),
-      ).toBeInTheDocument();
+        ).length,
+      ).toBeGreaterThan(0);
       expect(
         screen.getByText(
           `${facility.remainingTermMonths} months remaining`,

@@ -311,6 +311,7 @@ test.describe('Authentication journeys', () => {
     await page.clock.install({
       time: new Date('2026-11-13T10:00:00.000Z'),
     });
+    await page.clock.pauseAt(new Date('2026-11-13T10:00:00.000Z'));
     await signInAs(page, 'Fahad Al-Salem');
 
     await page.clock.fastForward(89_999);

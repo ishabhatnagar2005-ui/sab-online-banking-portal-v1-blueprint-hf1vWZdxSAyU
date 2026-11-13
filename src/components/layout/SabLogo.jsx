@@ -75,7 +75,7 @@ export function SabLogo({
           width="48"
           height="48"
           rx="11"
-          fill="#006b57"
+          fill="#d22630"
         />
         <path
           d="M24 7 39 15.25v4H9v-4L24 7Z"

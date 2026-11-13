@@ -264,7 +264,7 @@ export function StatusMessage({
         )}
       >
         {showLabel ? (
-          <p className="font-semibold">{resolvedLabel}</p>
+          <h3 className="font-semibold">{resolvedLabel}</h3>
         ) : (
           <span className="sr-only">
             {configuration.label}:{' '}

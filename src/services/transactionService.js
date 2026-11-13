@@ -236,9 +236,16 @@ function normalizeFilters(filters) {
     typeof candidate.query === 'string'
       ? candidate.query.trim().toLocaleLowerCase()
       : '';
+  const fromCandidate = candidate.fromDate ?? candidate.from ?? null;
   const fromDate =
-    candidate.fromDate ?? candidate.from ?? null;
-  const toDate = candidate.toDate ?? candidate.to ?? null;
+    typeof fromCandidate === 'string' && fromCandidate.trim().length > 0
+      ? fromCandidate.trim()
+      : null;
+  const toCandidate = candidate.toDate ?? candidate.to ?? null;
+  const toDate =
+    typeof toCandidate === 'string' && toCandidate.trim().length > 0
+      ? toCandidate.trim()
+      : null;
   const direction = candidate.direction ?? 'all';
   const category =
     typeof candidate.category === 'string'

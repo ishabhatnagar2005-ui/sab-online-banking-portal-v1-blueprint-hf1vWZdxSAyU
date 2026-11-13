@@ -246,7 +246,9 @@ export function formatSar(
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
     ...formatterOptions,
-  }).format(amount);
+  })
+    .format(amount)
+    .replace(/\u00a0/g, ' ');
 }
 
 /**

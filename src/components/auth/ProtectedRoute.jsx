@@ -10,6 +10,9 @@ import {
   EVENT_NAMES,
   eventBus as defaultEventBus,
 } from '../../services/eventBus';
+import {
+  sessionManager as defaultSessionManager,
+} from '../../services/sessionManager';
 import { LoadingState } from '../ui/LoadingState';
 
 const AUTHENTICATED_STATUSES = Object.freeze([
@@ -228,6 +231,12 @@ export function ProtectedRoute({
     permitted,
     sessionGuardAdapter,
   ]);
+
+  useEffect(() => {
+    if (permitted) {
+      defaultSessionManager.recordActivity();
+    }
+  }, [location.pathname, permitted]);
 
   if (pending) {
     return loadingFallback;

@@ -656,7 +656,7 @@ export function FinancingPage({
                           </h2>
                           <p className="bidi-plaintext mt-1 text-sm text-ink-muted">
                             {content.facilityReference}:{' '}
-                            {facilityId}
+                            <span>{facilityId}</span>
                           </p>
                         </div>
                       </div>

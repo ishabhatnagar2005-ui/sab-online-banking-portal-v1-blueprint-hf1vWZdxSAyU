@@ -635,7 +635,7 @@ export function createStorageService(options = {}) {
     } catch (error) {
       try {
         adapter.restore(previousSnapshot);
-      } catch (rollbackError) {
+      } catch {
         return failure(
           STORAGE_SERVICE_ERROR_CODES.RESTORE_FAILED,
           'The demonstration storage could not be initialized and its previous state could not be restored.',
@@ -702,10 +702,10 @@ export function createStorageService(options = {}) {
         restoredKeys: [...STORAGE_LOGICAL_KEY_ALLOW_LIST],
         activePersona: null,
       });
-    } catch (error) {
+    } catch {
       try {
         adapter.restore(previousSnapshot);
-      } catch (rollbackError) {
+      } catch {
         return failure(
           STORAGE_SERVICE_ERROR_CODES.RESTORE_FAILED,
           'The demonstration reset failed and the previous state could not be restored.',
@@ -773,9 +773,10 @@ export function createStorageService(options = {}) {
     STORAGE_LOGICAL_KEY_ALLOW_LIST.forEach((logicalKey) => {
       try {
         const physicalKey = getStorageKey(logicalKey);
+        const raw = adapter.getItem(physicalKey);
         const value = adapter.readJson(physicalKey);
 
-        if (value !== null) {
+        if (raw !== null) {
           initializedKeys.push(logicalKey);
           namespaceValid =
             namespaceValid && validators[logicalKey](value);

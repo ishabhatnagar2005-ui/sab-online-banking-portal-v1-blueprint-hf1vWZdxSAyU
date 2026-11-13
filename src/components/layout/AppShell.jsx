@@ -349,6 +349,7 @@ function AssistantPanel({ service }) {
       className="fixed inset-x-4 bottom-4 z-40 flex max-h-[min(42rem,calc(100dvh-6rem))] flex-col overflow-hidden rounded-lg border border-border bg-white shadow-elevated sm:start-auto sm:w-[24rem]"
       aria-labelledby={`assistant-title-${generatedId}`}
       data-digital-assistant=""
+      data-assistant-language={language}
     >
       <div className="flex shrink-0 items-center justify-between gap-3 border-b border-border bg-sab-700 px-4 py-3 text-white">
         <div className="flex min-w-0 items-center gap-2">

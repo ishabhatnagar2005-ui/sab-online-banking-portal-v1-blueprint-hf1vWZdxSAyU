@@ -51,3 +51,7 @@ Desktop.ini
 
 # Local Vite artifacts
 .vite/
+
+# Local specification documents
+SAB_Online_Banking_Portal_Static_PRD.md
+*.docx

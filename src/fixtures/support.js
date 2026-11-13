@@ -378,14 +378,10 @@ const riyadhBranch = Object.freeze({
   coordinates: null,
   services: Object.freeze([
     'Customer service',
-    'Account services',
-    'Card services',
     'Self-service kiosk',
   ]),
   servicesAr: Object.freeze([
     'خدمة العملاء',
-    'خدمات الحسابات',
-    'خدمات البطاقات',
     'جهاز خدمة ذاتية',
   ]),
   kioskCapabilityIds: Object.freeze([
@@ -414,14 +410,10 @@ const jeddahBranch = Object.freeze({
   coordinates: null,
   services: Object.freeze([
     'Customer service',
-    'Account services',
-    'Card services',
     'Self-service kiosk',
   ]),
   servicesAr: Object.freeze([
     'خدمة العملاء',
-    'خدمات الحسابات',
-    'خدمات البطاقات',
     'جهاز خدمة ذاتية',
   ]),
   kioskCapabilityIds: Object.freeze([
@@ -450,14 +442,10 @@ const alKhobarBranch = Object.freeze({
   coordinates: null,
   services: Object.freeze([
     'Customer service',
-    'Account services',
-    'Card services',
     'Self-service kiosk',
   ]),
   servicesAr: Object.freeze([
     'خدمة العملاء',
-    'خدمات الحسابات',
-    'خدمات البطاقات',
     'جهاز خدمة ذاتية',
   ]),
   kioskCapabilityIds: Object.freeze([

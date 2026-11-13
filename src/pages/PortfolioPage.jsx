@@ -291,6 +291,7 @@ export function PortfolioPage({
       >
         <ErrorState
           error={resource.error}
+          message={resource.error?.errorMessage}
           onRetry={resource.retry}
           retrying={resource.loading}
           showErrorCode
@@ -409,7 +410,7 @@ export function PortfolioPage({
                             </span>
                             <span className="bidi-plaintext mt-1 block text-xs text-ink-muted">
                               {content.accountNumber}:{' '}
-                              {account.maskedNumber}
+                              <span>{account.maskedNumber}</span>
                             </span>
                           </span>
                           <ArrowIcon />

@@ -351,10 +351,11 @@ export function isValidTransaction(value, expectedOwnerId) {
   const id = value.id ?? value.transactionId;
   const date = value.postedAt ?? value.date;
   const description = value.description ?? value.merchant;
+  const accountId = value.accountId ?? value.cardId;
 
   return (
     isNonEmptyString(id) &&
-    isNonEmptyString(value.accountId) &&
+    isNonEmptyString(accountId) &&
     isValidPersonaKey(value.ownerId) &&
     (expectedOwnerId === undefined || value.ownerId === expectedOwnerId) &&
     isValidIsoDate(date) &&
@@ -433,7 +434,16 @@ export function isValidCard(value, expectedOwnerId) {
     (value.recentTransactions === undefined ||
       (Array.isArray(value.recentTransactions) &&
         value.recentTransactions.every((transaction) =>
-          isValidTransaction(transaction, value.ownerId),
+          isValidTransaction(
+            {
+              ...transaction,
+              accountId:
+                transaction.accountId ??
+                transaction.cardId ??
+                value.linkedAccountId,
+            },
+            value.ownerId,
+          ),
         )))
   );
 }
@@ -661,15 +671,20 @@ export function isValidTransactionFilters(value) {
   const from = value.from ?? value.fromDate;
   const to = value.to ?? value.toDate;
 
-  if (from !== undefined && !isValidIsoDate(from)) {
+  const normalizedFrom =
+    typeof from === 'string' && from.trim().length > 0 ? from.trim() : undefined;
+  const normalizedTo =
+    typeof to === 'string' && to.trim().length > 0 ? to.trim() : undefined;
+
+  if (normalizedFrom !== undefined && !isValidIsoDate(normalizedFrom)) {
     return false;
   }
 
-  if (to !== undefined && !isValidIsoDate(to)) {
+  if (normalizedTo !== undefined && !isValidIsoDate(normalizedTo)) {
     return false;
   }
 
-  if (from !== undefined && to !== undefined && from > to) {
+  if (normalizedFrom !== undefined && normalizedTo !== undefined && normalizedFrom > normalizedTo) {
     return false;
   }
 

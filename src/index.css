@@ -6,17 +6,29 @@
   :root {
     color-scheme: light;
 
-    --sab-green-50: #edf8f5;
-    --sab-green-100: #d4eee7;
-    --sab-green-200: #a9ddd0;
-    --sab-green-300: #73c5b2;
-    --sab-green-400: #3ba58e;
-    --sab-green-500: #12836c;
-    --sab-green-600: #006b57;
-    --sab-green-700: #005445;
-    --sab-green-800: #064438;
-    --sab-green-900: #07382f;
-    --sab-green-950: #03201b;
+    --sab-red-50: #fdf2f3;
+    --sab-red-100: #fce4e6;
+    --sab-red-200: #f8c0c4;
+    --sab-red-300: #f18c94;
+    --sab-red-400: #e84d58;
+    --sab-red-500: #dc313d;
+    --sab-red-600: #d22630;
+    --sab-red-700: #a6192e;
+    --sab-red-800: #871424;
+    --sab-red-900: #6f1422;
+    --sab-red-950: #3d060e;
+
+    --sab-green-50: #fdf2f3;
+    --sab-green-100: #fce4e6;
+    --sab-green-200: #f8c0c4;
+    --sab-green-300: #f18c94;
+    --sab-green-400: #e84d58;
+    --sab-green-500: #dc313d;
+    --sab-green-600: #d22630;
+    --sab-green-700: #a6192e;
+    --sab-green-800: #871424;
+    --sab-green-900: #6f1422;
+    --sab-green-950: #3d060e;
 
     --sab-gold-50: #fdf9ed;
     --sab-gold-100: #f8edce;
@@ -31,18 +43,18 @@
     --sab-gold-950: #3b1d0d;
 
     --sab-surface: #ffffff;
-    --sab-surface-subtle: #f7faf9;
-    --sab-surface-muted: #edf3f1;
-    --sab-ink: #152521;
-    --sab-ink-muted: #52645f;
-    --sab-ink-subtle: #71817d;
+    --sab-surface-subtle: #f8f9fa;
+    --sab-surface-muted: #f1f3f4;
+    --sab-ink: #1a1a1a;
+    --sab-ink-muted: #4d4d4d;
+    --sab-ink-subtle: #595959;
     --sab-border: #d5dfdc;
     --sab-border-strong: #a8b8b3;
     --sab-success: #16794f;
     --sab-warning: #b86b00;
     --sab-danger: #b42318;
     --sab-information: #1769aa;
-    --sab-focus: #006b57;
+    --sab-focus: #d22630;
     --sab-focus-offset: #ffffff;
 
     --sab-radius-sm: 0.25rem;
@@ -50,11 +62,11 @@
     --sab-radius-lg: 0.5rem;
     --sab-radius-xl: 0.75rem;
     --sab-shadow-card:
-      0 1px 3px rgb(3 32 27 / 0.08),
-      0 1px 2px -1px rgb(3 32 27 / 0.08);
+      0 1px 3px rgb(61 6 14 / 0.08),
+      0 1px 2px -1px rgb(61 6 14 / 0.08);
     --sab-shadow-elevated:
-      0 12px 24px -8px rgb(3 32 27 / 0.18),
-      0 4px 8px -4px rgb(3 32 27 / 0.08);
+      0 12px 24px -8px rgb(61 6 14 / 0.18),
+      0 4px 8px -4px rgb(61 6 14 / 0.08);
   }
 
   *,
@@ -88,6 +100,7 @@
     min-height: 100vh;
     min-height: 100dvh;
     margin: 0;
+    padding-top: 2px;
     background-color: var(--sab-surface-subtle);
     color: var(--sab-ink);
     font-family: inherit;
@@ -196,8 +209,8 @@
   }
 
   ::selection {
-    background-color: var(--sab-green-200);
-    color: var(--sab-green-950);
+    background-color: var(--sab-red-200);
+    color: var(--sab-red-950);
   }
 
   :focus-visible {

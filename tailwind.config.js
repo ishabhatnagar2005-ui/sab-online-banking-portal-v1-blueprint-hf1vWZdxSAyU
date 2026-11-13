@@ -1,15 +1,15 @@
-const sabGreen = {
-  50: '#edf8f5',
-  100: '#d4eee7',
-  200: '#a9ddd0',
-  300: '#73c5b2',
-  400: '#3ba58e',
-  500: '#12836c',
-  600: '#006b57',
-  700: '#005445',
-  800: '#064438',
-  900: '#07382f',
-  950: '#03201b',
+const sabRed = {
+  50: '#fdf2f3',
+  100: '#fce4e6',
+  200: '#f8c0c4',
+  300: '#f18c94',
+  400: '#e84d58',
+  500: '#dc313d',
+  600: '#d22630',
+  700: '#a6192e',
+  800: '#871424',
+  900: '#6f1422',
+  950: '#3d060e',
 };
 
 const sabGold = {
@@ -32,20 +32,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        sab: sabGreen,
+        sab: sabRed,
         gold: sabGold,
-        primary: sabGreen,
+        primary: sabRed,
         accent: sabGold,
         surface: {
           DEFAULT: '#ffffff',
           subtle: '#f7faf9',
           muted: '#edf3f1',
-          inverse: sabGreen[950],
+          inverse: sabRed[950],
         },
         ink: {
-          DEFAULT: '#152521',
-          muted: '#52645f',
-          subtle: '#71817d',
+          DEFAULT: '#1a1a1a',
+          muted: '#4d4d4d',
+          subtle: '#595959',
           inverse: '#ffffff',
         },
         border: {
@@ -69,8 +69,8 @@ export default {
         arabic: ['Noto Sans Arabic', 'Tahoma', 'Arial', 'sans-serif'],
       },
       ringColor: {
-        DEFAULT: sabGreen[600],
-        focus: sabGreen[600],
+        DEFAULT: sabRed[600],
+        focus: sabRed[600],
         danger: '#b42318',
       },
       ringWidth: {
@@ -80,7 +80,7 @@ export default {
         DEFAULT: '2px',
       },
       outlineColor: {
-        focus: sabGreen[600],
+        focus: sabRed[600],
       },
       screens: {
         xs: '30rem',
@@ -100,7 +100,7 @@ export default {
         card: '0 1px 3px 0 rgb(3 32 27 / 0.08), 0 1px 2px -1px rgb(3 32 27 / 0.08)',
         elevated:
           '0 12px 24px -8px rgb(3 32 27 / 0.18), 0 4px 8px -4px rgb(3 32 27 / 0.08)',
-        focus: `0 0 0 3px ${sabGreen[200]}`,
+        focus: `0 0 0 3px ${sabRed[200]}`,
       },
     },
   },

@@ -128,6 +128,7 @@ function normalizeText(value, fieldName) {
   }
 
   return value
+    // eslint-disable-next-line no-control-regex
     .replace(/[\u0000-\u001f\u007f-\u009f]/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();

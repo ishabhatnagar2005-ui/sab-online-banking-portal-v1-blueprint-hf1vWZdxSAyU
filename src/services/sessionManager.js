@@ -26,6 +26,8 @@ const ACTIVITY_EVENT_NAMES = Object.freeze([
   'keydown',
   'touchstart',
   'focus',
+  'click',
+  'scroll',
 ]);
 
 const PASSIVE_EVENT_OPTIONS = Object.freeze({
@@ -705,6 +707,19 @@ export function createSessionManager(options = {}) {
    */
   function recordActivity(at) {
     if (!activeSession) {
+      if (typeof auth?.recordActivity === 'function') {
+        const directResponse = auth.recordActivity(at);
+        if (
+          directResponse?.status === 'success' &&
+          directResponse.data !== null &&
+          typeof directResponse.data === 'object'
+        ) {
+          applySession(directResponse.data);
+          scheduleSessionTransition();
+          return directResponse;
+        }
+      }
+
       return failure(
         AUTH_ERROR_CODES.SESSION_INVALID,
         SESSION_MESSAGES.INVALID,
@@ -1018,13 +1033,7 @@ export function createSessionManager(options = {}) {
     }
 
     const startRevision = ++lifecycleRevision;
-
-    updateState(
-      {
-        running: true,
-      },
-      'session-manager:started',
-    );
+    state.running = true;
 
     try {
       const response = await auth.validateSession();

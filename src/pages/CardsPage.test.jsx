@@ -252,7 +252,7 @@ describe('CardsPage', () => {
 
   it.each([
     {
-      control: 'freeze',
+      control: 'Freeze card',
       currentState: 'Active',
       proposedChange: 'Freeze card',
     },
